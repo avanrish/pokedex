@@ -6,13 +6,13 @@
       <pokemon-card />
     </div>
   </main>
-  <pagination />
+  <pokedex-pagination />
 </template>
 
 <script setup lang="ts">
 import SearchInput from '@/components/SearchInput.vue';
 import PokemonCard from '@/components/PokemonCard.vue';
-import Pagination from '@/components/Pagination.vue';
+import PokedexPagination from '@/components/PokedexPagination.vue';
 
 document.title = 'Pokèdex';
 </script>
