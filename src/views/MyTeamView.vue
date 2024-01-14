@@ -5,5 +5,9 @@
 </template>
 
 <script setup lang="ts">
-document.title = 'My Team | Pokèdex';
+import { onMounted } from 'vue';
+
+onMounted(() => {
+  document.title = 'My Team | Pokèdex';
+});
 </script>
