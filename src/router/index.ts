@@ -12,7 +12,7 @@ const router = createRouter({
     {
       path: Routes.MyTeam,
       name: 'team',
-      component: () => import('../views/TeamView.vue'),
+      component: () => import('../views/MyTeamView.vue'),
     },
     // TODO: 404 page
   ],

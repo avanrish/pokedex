@@ -4,4 +4,6 @@
   </div>
 </template>
 
-<!-- TODO: Change title -->
+<script setup lang="ts">
+document.title = 'My Team | Pokèdex';
+</script>

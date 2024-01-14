@@ -4,5 +4,6 @@
   </div>
 </template>
 
-<!-- TODO: Change favicon -->
-<!-- TODO: Change title -->
+<script setup lang="ts">
+document.title = 'Pokèdex';
+</script>
