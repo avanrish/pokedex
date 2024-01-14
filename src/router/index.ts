@@ -1,18 +1,20 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { Routes } from '@/util/enum/routes';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: () => import('../views/HomeView.vue'),
+      path: Routes.Pokedex,
+      name: 'pokedex',
+      component: () => import('../views/PokedexView.vue'),
     },
     {
-      path: '/team',
+      path: Routes.MyTeam,
       name: 'team',
       component: () => import('../views/TeamView.vue'),
     },
+    // TODO: 404 page
   ],
 });
 
