@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps(['pokemon']);
+defineProps(['pokemon', 'setUrl']);
 </script>
 
 <template>
@@ -11,7 +11,9 @@ defineProps(['pokemon']);
       <!--   <p class="text-sm text-green-500">In team</p>    -->
       <button
         type="button"
-        class="rounded bg-red-500 px-2 py-1 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        class="rounded bg-red-500 px-2 py-1 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:pointer-events-none disabled:opacity-50"
+        :disabled="!setUrl"
+        @click="setUrl"
       >
         Details
       </button>

@@ -5,6 +5,7 @@ import axios from 'axios';
 import PokemonItem from '@/components/PokemonItem.vue';
 import PokedexPagination from '@/components/PokedexPagination.vue';
 import type { PokemonsResult } from '@/types/pokemons-result';
+import PokemonDetails from '@/components/PokemonDetails.vue';
 
 const limit = 20;
 
@@ -12,6 +13,7 @@ const isLoading = ref(true);
 const pokemons = ref<{ name: string; url: string }[]>([]);
 const currentPage = ref(1);
 const totalPages = ref(1);
+const selectedUrl = ref('');
 
 const fetchPokemons = async () => {
   isLoading.value = true;
@@ -33,6 +35,14 @@ const next = () => {
   if (currentPage.value < totalPages.value) {
     currentPage.value += 1;
   }
+};
+
+const setUrl = (url: string) => {
+  selectedUrl.value = url;
+};
+
+const close = () => {
+  selectedUrl.value = '';
 };
 
 watch(currentPage, fetchPokemons);
@@ -57,7 +67,12 @@ fetchPokemons();
           </li>
         </template>
         <template v-else>
-          <pokemon-item v-for="pokemon in pokemons" :key="pokemon" :pokemon="pokemon.name" />
+          <pokemon-item
+            v-for="pokemon in pokemons"
+            :key="pokemon"
+            :pokemon="pokemon.name"
+            :set-url="() => setUrl(pokemon.url)"
+          />
         </template>
       </template>
     </ul>
@@ -68,4 +83,5 @@ fetchPokemons();
     :previous="previous"
     :next="next"
   />
+  <pokemon-details :url="selectedUrl" :close="close" />
 </template>
