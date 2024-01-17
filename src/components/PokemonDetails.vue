@@ -1,12 +1,18 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import axios from 'axios';
 import type { Pokemon } from '@/types/pokemon';
+import { useLocalStorage } from '@vueuse/core';
+import type { TeamPokemon } from '@/types/team';
 
 const props = defineProps(['url', 'close']);
 const dialog = ref<HTMLDialogElement | null>(null);
 
 const pokemon = ref<Pokemon | null>(null);
+
+const team = useLocalStorage<TeamPokemon[]>('team', []);
+
+const isInTeam = computed(() => team.value.findIndex((p) => p.name === pokemon.value?.name) > -1);
 
 watch(
   () => props.url,
@@ -22,6 +28,18 @@ watch(
 const fetchPokemon = async (url: string) => {
   const { data } = await axios<Pokemon>(url);
   pokemon.value = data;
+};
+
+const addToTeam = () => {
+  if (pokemon.value) {
+    team.value.push({ name: pokemon.value.name, image: pokemon.value.sprites.front_default });
+  }
+};
+
+const removeFromTeam = () => {
+  if (pokemon.value) {
+    team.value = team.value.filter((p) => p.name !== pokemon.value?.name);
+  }
 };
 </script>
 
@@ -79,8 +97,10 @@ const fetchPokemon = async (url: string) => {
       <div class="mt-2 flex gap-x-2">
         <button
           class="h-10 flex-1 rounded-md bg-red-500 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-red-400 disabled:pointer-events-none disabled:opacity-50"
+          @click="isInTeam ? removeFromTeam() : addToTeam()"
         >
-          Add to team
+          <span v-if="isInTeam">Remove from team</span>
+          <span v-else>Add to team</span>
         </button>
         <form method="dialog" @submit="close" class="flex flex-1">
           <button
