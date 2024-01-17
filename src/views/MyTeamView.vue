@@ -6,7 +6,7 @@ import { useLocalStorage } from '@vueuse/core';
 const team = useLocalStorage<TeamPokemon[]>('team', []);
 
 onMounted(() => {
-  document.title = 'My Team | Pokèdex';
+  document.title = 'My Team | Pokédex';
 });
 </script>
 

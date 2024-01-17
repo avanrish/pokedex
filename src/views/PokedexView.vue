@@ -48,7 +48,7 @@ const close = () => {
 watch(currentPage, fetchPokemons);
 
 onMounted(() => {
-  document.title = 'Pokèdex';
+  document.title = 'Pokédex';
 });
 
 fetchPokemons();
